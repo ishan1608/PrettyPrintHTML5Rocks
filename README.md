@@ -51,5 +51,5 @@ Awesome! _You are one of the persons who like this extension and would like to s
 #### Contact info
 
 * **Twitter:** [@ishanatmuz](http://twitter.com/#!/ishanatmuz)
-* **Blog:** http:/www.ishanatmuz.wordpress.com/
+* **Blog:** www.ishanatmuz.wordpress.com
 * **Email id:** ishanatmuzaffarpur@gmail.com
