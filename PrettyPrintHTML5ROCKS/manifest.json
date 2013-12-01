@@ -6,10 +6,15 @@
 	"version": "0.1",
 	
 	"permissions": [
-		"http://*.html5rocks.com/*"
+		"activeTab"
 	],
+	
 	"browser_action": {
-		"default_ico": "images/icon_128.png",
-		"default_popup": "popup.html"
-	}
+		"default_icon": "images/icon_128.png"
+	},
+	
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+  }
 }
