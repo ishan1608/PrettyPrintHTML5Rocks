@@ -28,9 +28,12 @@ if(location.href.substring(0,39) === "http://www.html5rocks.com/en/tutorials/" &
 	// html5rocks->tutorial
 	
 	// switching between print and web display
-	// defaults to 'false' in the first run. I have no Idea why.
-	// If someone can explain this then please do in the comments.
-	if(document.getElementsByTagName('header')[0].style.display==='none') {
+	// document.getElementsByTagName('header')[0].style.display
+	// Defaults to 'false' in the first run.
+	// element.style doesn't get computed styles it gets set styles
+	// instead use window.getComputedStyle(element)
+	// referred from here http://stackoverflow.com/questions/20329730/
+	if(window.getComputedStyle(document.getElementsByTagName('header')[0]).display==='none') {
 		pageMode='block';
 		urlMode='none';
 	} else {
@@ -105,9 +108,12 @@ if(location.href.substring(0,39) === "http://www.html5rocks.com/en/tutorials/" &
 	// html5rocks->update
 	
 	// switching between print and web display
-	// defaults to 'false' in the first run. I have no Idea why.
-	// If someone can explain this then please do in the comments.
-	if(document.getElementsByTagName('header')[0].style.display==='none') {
+	// document.getElementsByTagName('header')[0].style.display
+	// Defaults to 'false' in the first run.
+	// element.style doesn't get computed styles it gets set styles
+	// instead use window.getComputedStyle(element)
+	// referred from here http://stackoverflow.com/questions/20329730/
+	if(window.getComputedStyle(document.getElementsByTagName('header')[0]).display==='none') {
 		pageMode='block';
 		urlMode='none';
 	} else {
@@ -168,5 +174,5 @@ if(location.href.substring(0,39) === "http://www.html5rocks.com/en/tutorials/" &
 	window.alert("You are on html5rocks, Now Please choose an article to print");
 } else {
 	// Some website other than HTML5Rocks
-	window.alert("This extension only prettyfies html5rocks Please visit http://www.html5rocks.com");
+	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
 }
