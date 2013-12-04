@@ -1,4 +1,4 @@
-[Welcome to PrettyPrintHTML5ROCKS!](https://travis-ci.org/adobe/brackets)
+[Welcome to PrettyPrintHTML5ROCKS!](http://www.ishanatmuz.wordpress.com)
 -------------------
 
 This is an early version of PrettyPrintHTML5ROCKS, a Google Chrome extension built to *print* the articles from http://www.html5rocks.com 
