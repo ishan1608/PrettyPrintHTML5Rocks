@@ -9,6 +9,11 @@ This is the list of features that I want to implement, and the ones that have be
 >I am hoping to use a library to create PDF from the pages.
 >This is one library that I found: http://parall.ax/products/jspdf
 
+###Issue #1
+* The page doesn't renders correctly when the user is redirected from another language to an English article.
+Quick Fix **Redirecing the user to same article's original (English) version.** This fix notifies the user that he/she is being redirected. Then the user has to click again on the extension to print.
+This is two step process requires three clicks from the user. It has to be reduced to one step process just like the one offered to original article users.
+
 ----------------------------------------------
 
 #####Please Give me suggestion on where to improve. What features to add. And if there are any bugs, which I missed. Please report them to me.

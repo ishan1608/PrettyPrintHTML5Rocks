@@ -25,6 +25,12 @@
 // Current Working set
 
 if(location.href.substring(0,39) === "http://www.html5rocks.com/en/tutorials/" && location.href.length > 46) {
+	// Going from redirect URL to the original English article
+	if(location.href.substring(location.href.lastIndexOf('/'),location.href.lastIndexOf('/')+22) === "/?redirect_from_locale" ) {
+		window.alert("Redirecting you to original article. Please print the article from there.");
+		window.location=window.location.href.substring(0,window.location.href.lastIndexOf('/'));
+	}
+	
 	// html5rocks->tutorial
 	
 	// switching between print and web display
@@ -105,6 +111,12 @@ if(location.href.substring(0,39) === "http://www.html5rocks.com/en/tutorials/" &
 	}
 	
 } else if(location.href.substring(0,30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
+	// Going from redirect URL to the original English article
+	if(location.href.substring(location.href.lastIndexOf('/'),location.href.lastIndexOf('/')+22) === "/?redirect_from_locale" ) {
+		window.alert("Redirecting you to original article. Please print the article from there.");
+		window.location=window.location.href.substring(0,window.location.href.lastIndexOf('/'));
+	}
+	
 	// html5rocks->update
 	
 	// switching between print and web display
