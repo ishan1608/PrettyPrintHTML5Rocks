@@ -13,16 +13,16 @@ This is the list of features that I want to implement, and the ones that have be
 I have to find a way to do automated testing to make sure everything works fine.
 
 ####URL(s) to test
->http://www.html5rocks.com/en/
->http://www.html5rocks.com/it/
->http://www.html5rocks.com/en/tutorials/
->http://www.html5rocks.com/en/tutorials/?page=1
->http://www.html5rocks.com/en/updates/
->http://www.html5rocks.com/en/tutorials/casestudies/hobbit/
->http://www.html5rocks.com/en/tutorials/developertools/mobile/
->http://updates.html5rocks.com/2013/11/The-Yeoman-Monthly-Digest-1
->http://www.html5rocks.com/en/tutorials/developertools/mobile/?redirect_from_locale=it
->http://ishanatmuz.wordpress.com/
+*  http://ishanatmuz.wordpress.com/
+*  http://www.html5rocks.com/en/
+*  http://www.html5rocks.com/it/
+*  http://www.html5rocks.com/en/tutorials/
+*  http://www.html5rocks.com/en/tutorials/?page=1
+*  http://www.html5rocks.com/en/updates/
+*  http://www.html5rocks.com/en/tutorials/casestudies/hobbit/
+*  http://www.html5rocks.com/en/tutorials/developertools/mobile/
+*  http://updates.html5rocks.com/2013/11/The-Yeoman-Monthly-Digest-1
+*  http://www.html5rocks.com/en/tutorials/developertools/mobile/?redirect_from_locale=it
 
 ----------------------------------------------
 
