@@ -9,10 +9,20 @@ This is the list of features that I want to implement, and the ones that have be
 >I am hoping to use a library to create PDF from the pages.
 >This is one library that I found: http://parall.ax/products/jspdf
 
-###Issue #1
-* The page doesn't renders correctly when the user is redirected from another language to an English article.
-Quick Fix **Redirecing the user to same article's original (English) version.** This fix notifies the user that he/she is being redirected. Then the user has to click again on the extension to print.
-This is two step process requires three clicks from the user. It has to be reduced to one step process just like the one offered to original article users.
+###Automated Testing
+I have to find a way to do automated testing to make sure everything works fine.
+
+####URL(s) to test
+>http://www.html5rocks.com/en/
+>http://www.html5rocks.com/it/
+>http://www.html5rocks.com/en/tutorials/
+>http://www.html5rocks.com/en/tutorials/?page=1
+>http://www.html5rocks.com/en/updates/
+>http://www.html5rocks.com/en/tutorials/casestudies/hobbit/
+>http://www.html5rocks.com/en/tutorials/developertools/mobile/
+>http://updates.html5rocks.com/2013/11/The-Yeoman-Monthly-Digest-1
+>http://www.html5rocks.com/en/tutorials/developertools/mobile/?redirect_from_locale=it
+>http://ishanatmuz.wordpress.com/
 
 ----------------------------------------------
 
