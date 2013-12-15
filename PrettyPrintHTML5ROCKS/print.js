@@ -8,15 +8,16 @@
  ****************************************************************************/
 
 /* Steps:
- 1. Rmove the top header of the page.
- 2. Remove the Table of Contents.
- 3. Fill the extra space by the article content.
- 4. Add the URL to bottom of the article.
- 5. Remove the disqus comments.
- 6. Remove the footer
- 7. If there are embedded videos remove them.
- 8. If there is redirect message remove it.
- 9. Call window.print() to print the document.
+  1. Rmove the top header of the page.
+  2. Remove the Table of Contents.
+  3. Fill the extra space by the article content.
+  4. Remove the number of comments.
+  5. Add the URL to bottom of the article.
+  6. Remove the disqus comments.
+  7. Remove the footer
+  8. If there are embedded videos remove them.
+  9. If there is redirect message remove it.
+ 10. Call window.print() to print the document.
 */
 
 /******************************************************
@@ -29,11 +30,11 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 {
 	// Breaking URL into parts
 	partsOfURL = location.href.split('/');
-	
+
 	if(partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined ) {
-		
+
 		// html5rocks->tutorial
-			
+
 			// switching between print and web display
 			// document.getElementsByTagName('header')[0].style.display
 			// Defaults to 'false' in the first run.
@@ -47,16 +48,16 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 				pageMode='none';
 				urlMode='block';
 			}
-			
+
 			// Remove top header
 			document.getElementsByTagName('header')[0].style.display=pageMode;
-			
+
 			// selecting divs so that further elements of the page can be selected
 			var divs=document.getElementsByTagName('div');
-			
+
 			// Hide Table of Contents
 			divs[1].style.display=pageMode;
-			
+
 			// switching the article between print mode and web mode
 			if(pageMode === 'none' ) {
 				// Making article fill the screen
@@ -69,7 +70,10 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 				divs[2].style.maxWidth='660px';
 				divs[2].style.width='87%';
 			}
-			
+
+			// Remove the number of comments
+			document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
+
 			// Creating URL Holder if it is not deifned
 			if(typeof(urlHolder)=='undefined') {
 				// Create a new element for the URL
@@ -78,7 +82,7 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 				urlHolder.className='cc pattern-bg-lighter';
 				// append it after the article
 				divs[2].appendChild(urlHolder);
-				
+
 				// Set innerText to the url
 				urlHolder.innerText=location.href;
 				// Stylising the reference
@@ -87,24 +91,24 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 				urlHolder.style.fontWeight='bold';
 				urlHolder.style.paddingTop='20px';
 			}
-			
+
 			// switching display of disqus comments for print mode and web mode
 			// divs[8].style.display=pageMode;
 			// This moethod doesn't works as embedded youtube videos are contained in div elements with class 'embed-container'
 			document.getElementById('disqus').style.display=pageMode;
-			
+
 			// switching display of urlHolder for print mode and web mode
 			urlHolder.style.display=urlMode;
-			
+
 			// switching display of footer for print mode and web mode
 			document.getElementsByTagName('footer')[0].style.display=pageMode;
-			
+
 			// Removing Youtube embedded videos if any because they come up as black spots in the print
 			embeds = document.getElementsByClassName('embed-container');
 			for( i=0 ; i<embeds.length ; i++ ) {
 				embeds[i].style.display = pageMode;
 			}
-			
+
 			// Removing the redirection from different language message
 			redirectMessage=document.getElementsByClassName('redirect_notification')[0];
 			if(redirectMessage) {
@@ -115,16 +119,16 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 			if(pageMode=='none') {
 				window.print();
 			}
-		
+
 	} else if(location.href.substring(0,30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
 		// Going from redirect URL to the original English article
 		if(location.href.substring(location.href.lastIndexOf('/'),location.href.lastIndexOf('/')+22) === "/?redirect_from_locale" ) {
 			window.alert("Redirecting you to original article. Please print the article from there.");
 			window.location=window.location.href.substring(0,window.location.href.lastIndexOf('/'));
 		}
-		
+
 		// html5rocks->update
-		
+
 		// switching between print and web display
 		// document.getElementsByTagName('header')[0].style.display === 'block'
 		// Defaults to 'false' in the first run.
@@ -138,10 +142,10 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 			pageMode='none';
 			urlMode='block';
 		}
-		
+
 		// Remove top header
 		document.getElementsByTagName('header')[0].style.display=pageMode;
-		
+
 		// selecting divs so that further elements of the page can be selected
 		var divs=document.getElementsByTagName('div');
 		// switch margin between 4.5em to 1em to give nice spacing
@@ -150,18 +154,18 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 		} else {
 			divs[5].style.margin='4.5em auto';
 		}
-		
+
 		// Remove tags, blank space and google+ share
 		divs[7].style.display=pageMode;
 		divs[8].style.display=pageMode;
 		divs[9].style.display=pageMode;
-		
+
 		// Setting reference div
 		var ref=divs[5].firstChild.nextSibling.lastChild.previousSibling;
-		
+
 		// switch between print mode and web mode for displaying reference
 		ref.style.display=pageMode;
-		
+
 		// Creating URL Holder if it is not deifned
 		if(typeof(urlHolder)=='undefined') {
 			// Create a new element for the URL
@@ -177,15 +181,15 @@ if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || locatio
 			urlHolder.style.textAlign='center';
 			urlHolder.style.fontWeight='bold';
 		}
-		
+
 		// switching display of urlHolder for print mode and web mode
 		urlHolder.style.display=urlMode;
-		
+
 		// Print the document.
 		if(pageMode=='none') {
 			window.print();
 		}
-		
+
 	} else {
 		// HTML5Rocks but not article
 		window.alert("You are on html5rocks, Now Please choose an article to print");
