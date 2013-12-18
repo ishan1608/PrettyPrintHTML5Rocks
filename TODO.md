@@ -3,6 +3,11 @@
 
 This is the list of features that I want to implement, and the ones that have been suggested. It also contains a list of bugs which aren't resolved yet.
 
+###Website
+* I am planning to create a project site for this project.
+>The site will be created using [GithubPages](http://pages.github.com/)
+>This will enable me to not worry about hosting, and will be easy to maintain, as I can directly push updates using my gitBash.
+
 ###PDF Creation
 
 * **Create PDF on it's own..** Instead of relying on Chrome's feature to make PDF file from the print windows. The extension should be capable of generating PDF on it's own. I thought of this because when creating PDF Chrome does not detects images which aren't directly image tags. It is necessary for this extension because, when converting articles to PDF using Chrome's print dialog. The Supported Browsers icons are not getting converted into PDF.

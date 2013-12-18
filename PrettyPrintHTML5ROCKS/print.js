@@ -128,14 +128,20 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
             // Print the document.
             if (pageMode === 'none') {
                 window.print();
+                // Switching back to webmode
+                articleModifier();
             }
         };
-        // calling same function causes the switch between printMode and webMode
-        // First call for printMode
-        articleModifier();
-        // Returning to webMode
-        articleModifier();
-
+        
+        // document.readyState returns 'complete' when the dom is ready to be manipulated.
+        if (document.readyState !== 'complete') {
+            window.alert("Please wait for the page to load completely.");
+        } else {
+            // calling articleModifier causes the switch between printMode and webMode
+            // First call for printMode
+            articleModifier();
+        }
+        
 	} else if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
         var updateModifier = function () {
             'use strict';
@@ -203,17 +209,22 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
     
             // switching display of urlHolder for print mode and web mode
             urlHolder.style.display = urlMode;
-    
+            
             // Print the document.
             if (pageMode === 'none') {
                 window.print();
+                // Switching back to webmode
+                updateModifier();
             }
         };
-        // calling same function causes the switch between printMode and webMode
-        // First call for printMode
-        updateModifier();
-        // Returning to webMode
-        updateModifier();
+        // document.readyState returns 'complete' when the dom is ready to be manipulated.
+        if (document.readyState !== 'complete') {
+            window.alert("Please wait for the page to load completely.");
+        } else {
+            // calling updateModifier causes the switch between printMode and webMode
+            // First call for printMode
+            updateModifier();
+        }
 	} else {
 		// HTML5Rocks but not article
 		window.alert("You are on html5rocks, Now Please choose an article to print");
