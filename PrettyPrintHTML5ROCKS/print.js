@@ -41,7 +41,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 
     if (partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined) {
 
-        var articleMode = function () {
+        var articleModifier = function () {
             'use strict';
             // html5rocks->tutorial
 
@@ -130,11 +130,14 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 window.print();
             }
         };
-        articleMode();
-        articleMode();
+        // calling same function causes the switch between printMode and webMode
+        // First call for printMode
+        articleModifier();
+        // Returning to webMode
+        articleModifier();
 
 	} else if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
-        var updateMode = function () {
+        var updateModifier = function () {
             'use strict';
             // I couldn't find any redirect pages for 'Update' but just in case
             // Going from redirect URL to the original English article
@@ -206,8 +209,11 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 window.print();
             }
         };
-        updateMode();
-        updateMode();
+        // calling same function causes the switch between printMode and webMode
+        // First call for printMode
+        updateModifier();
+        // Returning to webMode
+        updateModifier();
 	} else {
 		// HTML5Rocks but not article
 		window.alert("You are on html5rocks, Now Please choose an article to print");

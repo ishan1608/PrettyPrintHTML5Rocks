@@ -19,8 +19,8 @@ To start using PrettyPrintHTML5ROCKS, go to chrome web store and search for Pret
 
 #### Usage
 
-To use the extension. Go to any article on <http://www.html5rocks.com> which you want to print. Click on the PrettyPrintHTML5ROCKS<icon here> icon on the top right hand side along with the menu. The webpage would have been modified and the print dialog will be opened for you print the article. Clicking again on the icon will set the article back to original view.
-You can save the article into PDF format too for printing later. Google Chrome supports saving any print task as a PDF.
+To use the extension. Go to any article on <http://www.html5rocks.com> which you want to print. Click on the PrettyPrintHTML5ROCKS<icon here> icon on the top right hand side along with the menu. The webpage would have been modified and the print dialog will be opened for you print the article. Clicking on 'Cancel' or coming back after issuing the print command, the page will be as it was before.
+You can save the articles into PDF format too for printing later. Google Chrome supports saving any print task as a PDF.
 
 #### Need help?
 
