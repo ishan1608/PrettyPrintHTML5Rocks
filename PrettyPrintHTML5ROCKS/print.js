@@ -24,172 +24,190 @@
  *     Step By Step Code
  ******************************************************/
 
+// jsLint global variables
+/*jslint browser: true, devel: true */
+
 // Current Working set
 
-if(location.href.substring(0,30) === "http://updates.html5rocks.com/" || location.href.substring(0,26) === "http://www.html5rocks.com/")
-{
-	// Breaking URL into parts
-	partsOfURL = location.href.split('/');
+// Global variables
+var pageMode, urlMode;
+var embeds, ref;
+var i;
+var urlHolder, redirectMessage;
 
-	if(partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined ) {
+if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || location.href.substring(0, 26) === "http://www.html5rocks.com/") {
+    // Breaking URL into parts
+    var partsOfURL = location.href.split('/');
 
-		// html5rocks->tutorial
+    if (partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined) {
 
-			// switching between print and web display
-			// document.getElementsByTagName('header')[0].style.display
-			// Defaults to 'false' in the first run.
-			// element.style doesn't get computed styles it gets set styles
-			// instead use window.getComputedStyle(element)
-			// referred from here http://stackoverflow.com/questions/20329730/
-			if(window.getComputedStyle(document.getElementsByTagName('header')[0]).display==='none') {
-				pageMode='block';
-				urlMode='none';
-			} else {
-				pageMode='none';
-				urlMode='block';
-			}
+        var articleMode = function () {
+            'use strict';
+            // html5rocks->tutorial
 
-			// Remove top header
-			document.getElementsByTagName('header')[0].style.display=pageMode;
+            // switching between print and web display
+            // document.getElementsByTagName('header')[0].style.display
+            // Defaults to 'false' in the first run.
+            // element.style doesn't get computed styles it gets set styles
+            // instead use window.getComputedStyle(element)
+            // referred from here http://stackoverflow.com/questions/20329730/
+            if (window.getComputedStyle(document.getElementsByTagName('header')[0]).display === 'none') {
+                pageMode = 'block';
+                urlMode = 'none';
+            } else {
+                pageMode = 'none';
+                urlMode = 'block';
+            }
+    
+            // Remove top header
+            document.getElementsByTagName('header')[0].style.display = pageMode;
+    
+            // selecting divs so that further elements of the page can be selected
+            var divs = document.getElementsByTagName('div');
+    
+            // Hide Table of Contents
+            divs[1].style.display = pageMode;
+    
+            // switching the article between print mode and web mode
+            if (pageMode === 'none') {
+                // Making article fill the screen
+                divs[2].style.marginLeft = '0px';
+                divs[2].style.maxWidth = 'inherit';
+                divs[2].style.width = '100%';
+            } else {
+                // Making article shrink back
+                divs[2].style.marginLeft = '350px';
+                divs[2].style.maxWidth = '660px';
+                divs[2].style.width = '87%';
+            }
+    
+            // Remove the number of comments
+            document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
+    
+            // Creating URL Holder if it is not deifned
+            if (typeof (urlHolder) === 'undefined') {
+                // Create a new element for the URL
+                urlHolder = document.createElement('section');
+                // make it look like it belongs
+                urlHolder.className = 'cc pattern-bg-lighter';
+                // append it after the article
+                divs[2].appendChild(urlHolder);
+    
+                // Set innerText to the url
+                urlHolder.innerText = location.href;
+                // Stylising the reference
+                urlHolder.style.marginLeft = '0px';
+                urlHolder.style.textAlign = 'center';
+                urlHolder.style.fontWeight = 'bold';
+                urlHolder.style.paddingTop = '20px';
+            }
+    
+            // switching display of disqus comments for print mode and web mode
+            // divs[8].style.display=pageMode;
+            // This moethod doesn't works as embedded youtube videos are contained in div elements with class 'embed-container'
+            document.getElementById('disqus').style.display = pageMode;
+    
+            // switching display of urlHolder for print mode and web mode
+            urlHolder.style.display = urlMode;
+    
+            // switching display of footer for print mode and web mode
+            document.getElementsByTagName('footer')[0].style.display = pageMode;
+    
+            // Removing Youtube embedded videos if any because they come up as black spots in the print
+            embeds = document.getElementsByClassName('embed-container');
+            for (i = 0; i < embeds.length; i = i + 1) {
+                embeds[i].style.display = pageMode;
+            }
+    
+            // Removing the redirection from different language message
+            redirectMessage = document.getElementsByClassName('redirect_notification')[0];
+            if (redirectMessage) {
+                redirectMessage.style.display = pageMode;
+            }
+    
+            // Print the document.
+            if (pageMode === 'none') {
+                window.print();
+            }
+        };
+        articleMode();
+        articleMode();
 
-			// selecting divs so that further elements of the page can be selected
-			var divs=document.getElementsByTagName('div');
-
-			// Hide Table of Contents
-			divs[1].style.display=pageMode;
-
-			// switching the article between print mode and web mode
-			if(pageMode === 'none' ) {
-				// Making article fill the screen
-				divs[2].style.marginLeft='0px';
-				divs[2].style.maxWidth='inherit';
-				divs[2].style.width='100%';
-			} else {
-				// Making article shrink back
-				divs[2].style.marginLeft='350px';
-				divs[2].style.maxWidth='660px';
-				divs[2].style.width='87%';
-			}
-
-			// Remove the number of comments
-			document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
-
-			// Creating URL Holder if it is not deifned
-			if(typeof(urlHolder)=='undefined') {
-				// Create a new element for the URL
-				var urlHolder = document.createElement('section');
-				// make it look like it belongs
-				urlHolder.className='cc pattern-bg-lighter';
-				// append it after the article
-				divs[2].appendChild(urlHolder);
-
-				// Set innerText to the url
-				urlHolder.innerText=location.href;
-				// Stylising the reference
-				urlHolder.style.marginLeft='0px';
-				urlHolder.style.textAlign='center';
-				urlHolder.style.fontWeight='bold';
-				urlHolder.style.paddingTop='20px';
-			}
-
-			// switching display of disqus comments for print mode and web mode
-			// divs[8].style.display=pageMode;
-			// This moethod doesn't works as embedded youtube videos are contained in div elements with class 'embed-container'
-			document.getElementById('disqus').style.display=pageMode;
-
-			// switching display of urlHolder for print mode and web mode
-			urlHolder.style.display=urlMode;
-
-			// switching display of footer for print mode and web mode
-			document.getElementsByTagName('footer')[0].style.display=pageMode;
-
-			// Removing Youtube embedded videos if any because they come up as black spots in the print
-			embeds = document.getElementsByClassName('embed-container');
-			for( i=0 ; i<embeds.length ; i++ ) {
-				embeds[i].style.display = pageMode;
-			}
-
-			// Removing the redirection from different language message
-			redirectMessage=document.getElementsByClassName('redirect_notification')[0];
-			if(redirectMessage) {
-				redirectMessage.style.display=pageMode;
-			}
-
-			// Print the document.
-			if(pageMode=='none') {
-				window.print();
-			}
-
-	} else if(location.href.substring(0,30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
-		// Going from redirect URL to the original English article
-		if(location.href.substring(location.href.lastIndexOf('/'),location.href.lastIndexOf('/')+22) === "/?redirect_from_locale" ) {
-			window.alert("Redirecting you to original article. Please print the article from there.");
-			window.location=window.location.href.substring(0,window.location.href.lastIndexOf('/'));
-		}
-
-		// html5rocks->update
-
-		// switching between print and web display
-		// document.getElementsByTagName('header')[0].style.display === 'block'
-		// Defaults to 'false' in the first run.
-		// element.style doesn't get computed styles it gets set styles
-		// instead use window.getComputedStyle(element)
-		// referred from here http://stackoverflow.com/questions/20329730/
-		if(window.getComputedStyle(document.getElementsByTagName('header')[0]).display==='none') {
-			pageMode='block';
-			urlMode='none';
-		} else {
-			pageMode='none';
-			urlMode='block';
-		}
-
-		// Remove top header
-		document.getElementsByTagName('header')[0].style.display=pageMode;
-
-		// selecting divs so that further elements of the page can be selected
-		var divs=document.getElementsByTagName('div');
-		// switch margin between 4.5em to 1em to give nice spacing
-		if(pageMode=='none') {
-			divs[5].style.margin='1em auto';
-		} else {
-			divs[5].style.margin='4.5em auto';
-		}
-
-		// Remove tags, blank space and google+ share
-		divs[7].style.display=pageMode;
-		divs[8].style.display=pageMode;
-		divs[9].style.display=pageMode;
-
-		// Setting reference div
-		var ref=divs[5].firstChild.nextSibling.lastChild.previousSibling;
-
-		// switch between print mode and web mode for displaying reference
-		ref.style.display=pageMode;
-
-		// Creating URL Holder if it is not deifned
-		if(typeof(urlHolder)=='undefined') {
-			// Create a new element for the URL
-			var urlHolder = document.createElement('section');
-			// make it look like it belongs
-			urlHolder.className='cc pattern-bg-lighter';
-			// append it side by side with reference
-			divs[5].appendChild(urlHolder);
-			// Set innerText to the url
-			urlHolder.innerText=location.href;
-			// Stylising the reference
-			urlHolder.style.marginLeft='0px';
-			urlHolder.style.textAlign='center';
-			urlHolder.style.fontWeight='bold';
-		}
-
-		// switching display of urlHolder for print mode and web mode
-		urlHolder.style.display=urlMode;
-
-		// Print the document.
-		if(pageMode=='none') {
-			window.print();
-		}
-
+	} else if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
+        var updateMode = function () {
+            'use strict';
+            // I couldn't find any redirect pages for 'Update' but just in case
+            // Going from redirect URL to the original English article
+            if (location.href.substring(location.href.lastIndexOf('/'), location.href.lastIndexOf('/') + 22) === "/?redirect_from_locale") {
+                window.alert("Redirecting you to original article. Please print the article from there.");
+                window.location = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
+            }
+    
+            // html5rocks->update
+    
+            // switching between print and web display
+            // document.getElementsByTagName('header')[0].style.display === 'block'
+            // Defaults to 'false' in the first run.
+            // element.style doesn't get computed styles it gets set styles
+            // instead use window.getComputedStyle(element)
+            // referred from here http://stackoverflow.com/questions/20329730/
+            if (window.getComputedStyle(document.getElementsByTagName('header')[0]).display === 'none') {
+                pageMode = 'block';
+                urlMode = 'none';
+            } else {
+                pageMode = 'none';
+                urlMode = 'block';
+            }
+    
+            // Remove top header
+            document.getElementsByTagName('header')[0].style.display = pageMode;
+    
+            // selecting divs so that further elements of the page can be selected
+            var divs = document.getElementsByTagName('div');
+            // switch margin between 4.5em to 1em to give nice spacing
+            if (pageMode === 'none') {
+                divs[5].style.margin = '1em auto';
+            } else {
+                divs[5].style.margin = '4.5em auto';
+            }
+    
+            // Remove tags, blank space and google+ share
+            divs[7].style.display = pageMode;
+            divs[8].style.display = pageMode;
+            divs[9].style.display = pageMode;
+    
+            // Setting reference div
+            ref = divs[5].firstChild.nextSibling.lastChild.previousSibling;
+    
+            // switch between print mode and web mode for displaying reference
+            ref.style.display = pageMode;
+    
+            // Creating URL Holder if it is not deifned
+            if (typeof (urlHolder) === 'undefined') {
+                // Create a new element for the URL
+                urlHolder = document.createElement('section');
+                // make it look like it belongs
+                urlHolder.className = 'cc pattern-bg-lighter';
+                // append it side by side with reference
+                divs[5].appendChild(urlHolder);
+                // Set innerText to the url
+                urlHolder.innerText = location.href;
+                // Stylising the reference
+                urlHolder.style.marginLeft = '0px';
+                urlHolder.style.textAlign = 'center';
+                urlHolder.style.fontWeight = 'bold';
+            }
+    
+            // switching display of urlHolder for print mode and web mode
+            urlHolder.style.display = urlMode;
+    
+            // Print the document.
+            if (pageMode === 'none') {
+                window.print();
+            }
+        };
+        updateMode();
+        updateMode();
 	} else {
 		// HTML5Rocks but not article
 		window.alert("You are on html5rocks, Now Please choose an article to print");
