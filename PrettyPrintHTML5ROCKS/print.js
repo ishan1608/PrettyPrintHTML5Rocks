@@ -11,13 +11,14 @@
   1. Rmove the top header of the page.
   2. Remove the Table of Contents.
   3. Fill the extra space by the article content.
-  4. Remove the number of comments.
-  5. Add the URL to bottom of the article.
-  6. Remove the disqus comments.
-  7. Remove the footer
-  8. If there are embedded videos remove them.
-  9. If there is redirect message remove it.
- 10. Call window.print() to print the document.
+  4. Resize the Code Snippets
+  5. Remove the number of comments.
+  6. Add the URL to bottom of the article.
+  7. Remove the disqus comments.
+  8. Remove the footer
+  9. If there are embedded videos remove them.
+ 10. If there is redirect message remove it.
+ 11. Call window.print() to print the document.
 */
 
 /******************************************************
@@ -31,7 +32,7 @@
 
 // Global variables
 var pageMode, urlMode;
-var embeds, ref;
+var embeds, ref, codeSnippets;
 var i;
 var urlHolder, redirectMessage;
 
@@ -74,11 +75,31 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 divs[2].style.marginLeft = '0px';
                 divs[2].style.maxWidth = 'inherit';
                 divs[2].style.width = '100%';
+                // Making text small
+                divs[2].style.fontSize = '12px';
+                // Reduce the line-height
+                divs[2].style.lineHeight = 1.0;
             } else {
                 // Making article shrink back
                 divs[2].style.marginLeft = '350px';
                 divs[2].style.maxWidth = '660px';
                 divs[2].style.width = '87%';
+                //Enlarging the text again
+                divs[2].style.fontSize = '18px';
+                // Reset the line-height
+                divs[2].style.lineHeight = 1.5;
+            }
+
+            // Resizng the code snippets
+            codeSnippets = document.getElementsByClassName('prettyprint');
+            if (pageMode === 'none') {
+                for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
+                    codeSnippets[i].style.fontSize = '10px';
+                }
+            } else {
+                for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
+                    codeSnippets[i].style.fontSize = '15px';
+                }
             }
     
             // Remove the number of comments
@@ -101,36 +122,35 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 urlHolder.style.fontWeight = 'bold';
                 urlHolder.style.paddingTop = '20px';
             }
-    
+                
             // switching display of disqus comments for print mode and web mode
-            // divs[8].style.display=pageMode;
-            // This moethod doesn't works as embedded youtube videos are contained in div elements with class 'embed-container'
             document.getElementById('disqus').style.display = pageMode;
-    
+
             // switching display of urlHolder for print mode and web mode
             urlHolder.style.display = urlMode;
-    
+
             // switching display of footer for print mode and web mode
             document.getElementsByTagName('footer')[0].style.display = pageMode;
-    
+
             // Removing Youtube embedded videos if any because they come up as black spots in the print
             embeds = document.getElementsByClassName('embed-container');
             for (i = 0; i < embeds.length; i = i + 1) {
                 embeds[i].style.display = pageMode;
             }
-    
+
             // Removing the redirection from different language message
             redirectMessage = document.getElementsByClassName('redirect_notification')[0];
             if (redirectMessage) {
                 redirectMessage.style.display = pageMode;
             }
-    
+
             // Print the document.
             if (pageMode === 'none') {
                 window.print();
                 // Switching back to webmode
                 articleModifier();
             }
+            
         };
         
         // document.readyState returns 'complete' when the dom is ready to be manipulated.
