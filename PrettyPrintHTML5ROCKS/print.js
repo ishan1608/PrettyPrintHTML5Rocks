@@ -35,17 +35,19 @@ var pageMode, urlMode;
 var embeds, ref, codeSnippets;
 var i;
 var urlHolder, redirectMessage;
+var articleFontSize = '12px', codeSnippetsFontSize = '10px';
+var ARTICLEFONTSIZEORIGINAL = '18px', CODESNIPPETSFONTSIZEORIGINAL = '15px';
 
 if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || location.href.substring(0, 26) === "http://www.html5rocks.com/") {
     // Breaking URL into parts
     var partsOfURL = location.href.split('/');
 
     if (partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined) {
-
+        
         var articleModifier = function () {
             'use strict';
             // html5rocks->tutorial
-
+            
             // switching between print and web display
             // document.getElementsByTagName('header')[0].style.display
             // Defaults to 'false' in the first run.
@@ -59,16 +61,16 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 pageMode = 'none';
                 urlMode = 'block';
             }
-    
+            
             // Remove top header
             document.getElementsByTagName('header')[0].style.display = pageMode;
-    
+            
             // selecting divs so that further elements of the page can be selected
             var divs = document.getElementsByTagName('div');
-    
+            
             // Hide Table of Contents
             divs[1].style.display = pageMode;
-    
+            
             // switching the article between print mode and web mode
             if (pageMode === 'none') {
                 // Making article fill the screen
@@ -76,7 +78,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 divs[2].style.maxWidth = 'inherit';
                 divs[2].style.width = '100%';
                 // Making text small
-                divs[2].style.fontSize = '12px';
+                divs[2].style.fontSize = articleFontSize;
                 // Reduce the line-height
                 divs[2].style.lineHeight = 1.0;
             } else {
@@ -85,26 +87,26 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 divs[2].style.maxWidth = '660px';
                 divs[2].style.width = '87%';
                 //Enlarging the text again
-                divs[2].style.fontSize = '18px';
+                divs[2].style.fontSize = ARTICLEFONTSIZEORIGINAL;
                 // Reset the line-height
                 divs[2].style.lineHeight = 1.5;
             }
-
+            
             // Resizng the code snippets
             codeSnippets = document.getElementsByClassName('prettyprint');
             if (pageMode === 'none') {
                 for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
-                    codeSnippets[i].style.fontSize = '10px';
+                    codeSnippets[i].style.fontSize = codeSnippetsFontSize;
                 }
             } else {
                 for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
-                    codeSnippets[i].style.fontSize = '15px';
+                    codeSnippets[i].style.fontSize = CODESNIPPETSFONTSIZEORIGINAL;
                 }
             }
-    
+            
             // Remove the number of comments
             document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
-    
+            
             // Creating URL Holder if it is not deifned
             if (typeof (urlHolder) === 'undefined') {
                 // Create a new element for the URL
@@ -113,7 +115,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 urlHolder.className = 'cc pattern-bg-lighter';
                 // append it after the article
                 divs[2].appendChild(urlHolder);
-    
+                
                 // Set innerText to the url
                 urlHolder.innerText = location.href;
                 // Stylising the reference
@@ -125,25 +127,25 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 
             // switching display of disqus comments for print mode and web mode
             document.getElementById('disqus').style.display = pageMode;
-
+            
             // switching display of urlHolder for print mode and web mode
             urlHolder.style.display = urlMode;
-
+            
             // switching display of footer for print mode and web mode
             document.getElementsByTagName('footer')[0].style.display = pageMode;
-
+            
             // Removing Youtube embedded videos if any because they come up as black spots in the print
             embeds = document.getElementsByClassName('embed-container');
             for (i = 0; i < embeds.length; i = i + 1) {
                 embeds[i].style.display = pageMode;
             }
-
+            
             // Removing the redirection from different language message
             redirectMessage = document.getElementsByClassName('redirect_notification')[0];
             if (redirectMessage) {
                 redirectMessage.style.display = pageMode;
             }
-
+            
             // Print the document.
             if (pageMode === 'none') {
                 window.print();
@@ -163,6 +165,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
         }
         
 	} else if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
+        
         var updateModifier = function () {
             'use strict';
             // I couldn't find any redirect pages for 'Update' but just in case
@@ -171,9 +174,9 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 window.alert("Redirecting you to original article. Please print the article from there.");
                 window.location = window.location.href.substring(0, window.location.href.lastIndexOf('/'));
             }
-    
+            
             // html5rocks->update
-    
+            
             // switching between print and web display
             // document.getElementsByTagName('header')[0].style.display === 'block'
             // Defaults to 'false' in the first run.
@@ -187,10 +190,10 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 pageMode = 'none';
                 urlMode = 'block';
             }
-    
+            
             // Remove top header
             document.getElementsByTagName('header')[0].style.display = pageMode;
-    
+            
             // selecting divs so that further elements of the page can be selected
             var divs = document.getElementsByTagName('div');
             // switch margin between 4.5em to 1em to give nice spacing
@@ -199,18 +202,18 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
             } else {
                 divs[5].style.margin = '4.5em auto';
             }
-    
+            
             // Remove tags, blank space and google+ share
             divs[7].style.display = pageMode;
             divs[8].style.display = pageMode;
             divs[9].style.display = pageMode;
-    
+            
             // Setting reference div
             ref = divs[5].firstChild.nextSibling.lastChild.previousSibling;
-    
+            
             // switch between print mode and web mode for displaying reference
             ref.style.display = pageMode;
-    
+            
             // Creating URL Holder if it is not deifned
             if (typeof (urlHolder) === 'undefined') {
                 // Create a new element for the URL
@@ -226,7 +229,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
                 urlHolder.style.textAlign = 'center';
                 urlHolder.style.fontWeight = 'bold';
             }
-    
+            
             // switching display of urlHolder for print mode and web mode
             urlHolder.style.display = urlMode;
             
@@ -253,3 +256,12 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 	// Some website other than HTML5Rocks
 	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
 }
+
+// size selector - a way to chose the font size
+var sizeSelector = function () {
+    'use strict';
+    // Currently I will be rendering the choice container with the old mehtods of creating every element using javascript
+    // TODO: I plan to keep HTML for the choice container in a separate file.
+    // It should be have the functionality of text plugin of requirejs. https://github.com/requirejs/text
+    // And rendering of Mustache. https://github.com/janl/mustache.js  --  http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
+};
