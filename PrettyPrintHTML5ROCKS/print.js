@@ -258,14 +258,3 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 	// Some website other than HTML5Rocks
 	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
 }
-
-// size selector - a way to chose the font size
-var sizeSelector = function () {
-    'use strict';
-    // Currently I will be rendering the choice container with the old mehtods of creating every element using javascript
-    // TODO: I plan to keep HTML for the choice container in a separate file.
-    // It should be having the functionality of text plugin of requirejs. https://github.com/requirejs/text
-    // And rendering of Mustache. https://github.com/janl/mustache.js  --  http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
-    // I am hoping to handle the text plugin and mustache using git submodules.
-    
-};
