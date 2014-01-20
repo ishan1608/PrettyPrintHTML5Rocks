@@ -35,10 +35,113 @@ var pageMode, urlMode;
 var embeds, ref, codeSnippets;
 var i;
 var urlHolder, redirectMessage;
+
 // Font sizes for different modes
 // 9 - small, 12 - normal, 18 - large
 var articleFontSize = '12px', codeSnippetsFontSize = '10px';
 var ARTICLEFONTSIZEORIGINAL = '18px', CODESNIPPETSFONTSIZEORIGINAL = '15px';
+var container, options;
+var small, normal, large, buttons;
+
+var continueCondition = false;
+var result;
+
+// size selector - a way to chose the font size
+// this function waits for the user response, and thus by nature acts as asynchronous function
+// Alas! I finally made an asynchronous function.
+// This should return a jQuery promise object, which will resolve when the user either clicks on blank space or any one of the three buttons.
+var sizeSelector = function () {
+    'use strict';
+    console.log('Size selector has been called');
+    // Currently I will be rendering the choice container with the old mehtods of creating every element using javascript
+    // TODO: I plan to keep HTML for the choice container in a separate file.
+    // It should be having the functionality of text plugin of requirejs. https://github.com/requirejs/text
+    // And rendering of Mustache. https://github.com/janl/mustache.js  --  http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
+    // jQuery promise object is required to handle the input from user which essentially behaves as an asynchronous call.
+    // I am hoping to handle third party libraries using git submodules.
+    
+    if (typeof (container) === 'undefined') {
+        // Creating a div element of size equivalent to the visible area.
+        container = document.createElement('div');
+        container.setAttribute('id', 'optionsContainer');
+        container.style.display = 'block';
+        container.style.position = 'fixed';
+        container.style.top = '0px';
+        container.style.left = '0px';
+        container.style.bottom = '0px';
+        container.style.right = '0px';
+        // background as 50% opaque black
+        container.style.backgroundColor = '#000';
+        container.style.opacity = 0.5;
+        // Setting the z-index 999
+        container.style.zIndex = 999;
+        // Add the element to the html of the page
+        document.body.appendChild(container);
+        
+        // Show the underneath page on click
+        container.onclick = function () {
+            container.style.display = 'none';
+            continueCondition = false;
+            return false;
+        };
+        
+        if (typeof (options) === 'undefined') {
+            // Creating the option choser
+            small  = document.createElement('button');
+            small.setAttribute('id', 'small');
+            small.innerText = 'Small';
+            small.style.backgroundColor = 'rgba(149,126,210)';
+            small.onclick = function () {
+                articleFontSize = '9px';
+                codeSnippetsFontSize = '8px';
+                continueCondition = true;
+                console.log('articleFontSize' + articleFontSize + 'codeSnippetsFontSize' + codeSnippetsFontSize);
+                return true;
+            };
+            normal = document.createElement('button');
+            normal.setAttribute('id', 'normal');
+            normal.innerText = 'Normal';
+            normal.style.backgroundColor = 'rgba(89,161,62)';
+            normal.onclick = function () {
+                articleFontSize = '12px';
+                codeSnippetsFontSize = '10px';
+                continueCondition = true;
+                console.log('articleFontSize' + articleFontSize + 'codeSnippetsFontSize' + codeSnippetsFontSize);
+                return true;
+            };
+            large  = document.createElement('button');
+            large.setAttribute('id', 'large');
+            large.innerText = 'Large';
+            large.style.backgroundColor = 'rgba(188,19,51)';
+            large.onclick = function () {
+                articleFontSize = '18px';
+                codeSnippetsFontSize = '15px';
+                continueCondition = true;
+                console.log('articleFontSize' + articleFontSize + 'codeSnippetsFontSize' + codeSnippetsFontSize);
+                return true;
+            };
+            buttons = [small, normal, large];
+            for (i = 0; i <= 2; i = i + 1) {
+                buttons[i].style.padding = '5px 10px 6px';
+                buttons[i].style.color = '#000';
+                buttons[i].style.textDecoration = 'none';
+                buttons[i].style.fontWeight = 'bold';
+                buttons[i].style.lineHeight = 3;
+                buttons[i].style.borderRadius = '5px';
+                buttons[i].style.boxShadow = '0 1px 3px rgba(0,0,0,0.5)';
+                buttons[i].style.textShadow = '0 -1px 1px rgba(0,0,0,0.25)';
+                buttons[i].style.borderBottom = '1px solid #222';
+                buttons[i].style.position = 'relative';
+                buttons[i].style.cursor = 'relative';
+                container.appendChild(buttons[i]);
+            }
+        } else {
+            options.style.display = 'block';
+        }
+    } else {
+        container.style.display = 'block';
+    }
+};
 
 if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || location.href.substring(0, 26) === "http://www.html5rocks.com/") {
     // Breaking URL into parts
@@ -46,113 +149,127 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 
     if (partsOfURL[4] === "tutorials" && partsOfURL[6] !== undefined) {
         
-        var articleModifier = function () {
+        var articleModifier = function (printMode) {
             'use strict';
             // html5rocks->tutorial
             
-            // switching between print and web display
-            // document.getElementsByTagName('header')[0].style.display
-            // Defaults to 'false' in the first run.
-            // element.style doesn't get computed styles it gets set styles
-            // instead use window.getComputedStyle(element)
-            // referred from here http://stackoverflow.com/questions/20329730/
-            if (window.getComputedStyle(document.getElementsByTagName('header')[0]).display === 'none') {
-                pageMode = 'block';
-                urlMode = 'none';
-            } else {
-                pageMode = 'none';
-                urlMode = 'block';
-            }
+            var modification = function () {
+                // switching between print and web display
+                // document.getElementsByTagName('header')[0].style.display
+                // Defaults to 'false' in the first run.
+                // element.style doesn't get computed styles it gets set styles
+                // instead use window.getComputedStyle(element)
+                // referred from here http://stackoverflow.com/questions/20329730/
+                if (window.getComputedStyle(document.getElementsByTagName('header')[0]).display === 'none') {
+                    pageMode = 'block';
+                    urlMode = 'none';
+                } else {
+                    pageMode = 'none';
+                    urlMode = 'block';
+                }
+
+                // Remove top header
+                document.getElementsByTagName('header')[0].style.display = pageMode;
+
+                // selecting divs so that further elements of the page can be selected
+                var divs = document.getElementsByTagName('div');
+
+                // Hide Table of Contents
+                divs[1].style.display = pageMode;
+
+                // switching the article between print mode and web mode
+                if (pageMode === 'none') {
+                    // Making article fill the screen
+                    divs[2].style.marginLeft = '0px';
+                    divs[2].style.maxWidth = 'inherit';
+                    divs[2].style.width = '100%';
+                    // Making text small
+                    divs[2].style.fontSize = articleFontSize;
+                    // Reduce the line-height
+                    divs[2].style.lineHeight = 1.0;
+                } else {
+                    // Making article shrink back
+                    divs[2].style.marginLeft = '350px';
+                    divs[2].style.maxWidth = '660px';
+                    divs[2].style.width = '87%';
+                    //Enlarging the text again
+                    divs[2].style.fontSize = ARTICLEFONTSIZEORIGINAL;
+                    // Reset the line-height
+                    divs[2].style.lineHeight = 1.5;
+                }
+
+                // Resizng the code snippets
+                codeSnippets = document.getElementsByClassName('prettyprint');
+                if (pageMode === 'none') {
+                    for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
+                        codeSnippets[i].style.fontSize = codeSnippetsFontSize;
+                    }
+                } else {
+                    for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
+                        codeSnippets[i].style.fontSize = CODESNIPPETSFONTSIZEORIGINAL;
+                    }
+                }
+
+                // Remove the number of comments
+                document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
+
+                // Creating URL Holder if it is not deifned
+                if (typeof (urlHolder) === 'undefined') {
+                    // Create a new element for the URL
+                    urlHolder = document.createElement('section');
+                    // make it look like it belongs
+                    urlHolder.className = 'cc pattern-bg-lighter';
+                    // append it after the article
+                    divs[2].appendChild(urlHolder);
+
+                    // Set innerText to the url
+                    urlHolder.innerText = location.href;
+                    // Stylising the reference
+                    urlHolder.style.marginLeft = '0px';
+                    urlHolder.style.textAlign = 'center';
+                    urlHolder.style.fontWeight = 'bold';
+                    urlHolder.style.paddingTop = '20px';
+                }
+
+                // switching display of disqus comments for print mode and web mode
+                document.getElementById('disqus').style.display = pageMode;
+
+                // switching display of urlHolder for print mode and web mode
+                urlHolder.style.display = urlMode;
+
+                // switching display of footer for print mode and web mode
+                document.getElementsByTagName('footer')[0].style.display = pageMode;
+
+                // Removing Youtube embedded videos if any because they come up as black spots in the print
+                embeds = document.getElementsByClassName('embed-container');
+                for (i = 0; i < embeds.length; i = i + 1) {
+                    embeds[i].style.display = pageMode;
+                }
+
+                // Removing the redirection from different language message
+                redirectMessage = document.getElementsByClassName('redirect_notification')[0];
+                if (redirectMessage) {
+                    redirectMessage.style.display = pageMode;
+                }
+
+                // Print the document.
+                if (pageMode === 'none') {
+                    window.print();
+                    // Switching back to webmode
+                    articleModifier(false);
+                }
+            };
             
-            // Remove top header
-            document.getElementsByTagName('header')[0].style.display = pageMode;
-            
-            // selecting divs so that further elements of the page can be selected
-            var divs = document.getElementsByTagName('div');
-            
-            // Hide Table of Contents
-            divs[1].style.display = pageMode;
-            
-            // switching the article between print mode and web mode
-            if (pageMode === 'none') {
-                // Making article fill the screen
-                divs[2].style.marginLeft = '0px';
-                divs[2].style.maxWidth = 'inherit';
-                divs[2].style.width = '100%';
-                // Making text small
-                divs[2].style.fontSize = articleFontSize;
-                // Reduce the line-height
-                divs[2].style.lineHeight = 1.0;
-            } else {
-                // Making article shrink back
-                divs[2].style.marginLeft = '350px';
-                divs[2].style.maxWidth = '660px';
-                divs[2].style.width = '87%';
-                //Enlarging the text again
-                divs[2].style.fontSize = ARTICLEFONTSIZEORIGINAL;
-                // Reset the line-height
-                divs[2].style.lineHeight = 1.5;
-            }
-            
-            // Resizng the code snippets
-            codeSnippets = document.getElementsByClassName('prettyprint');
-            if (pageMode === 'none') {
-                for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
-                    codeSnippets[i].style.fontSize = codeSnippetsFontSize;
+            if (printMode) {
+                // This is to be handled asynchronously. The best bet right now is to use jQuery promises.
+                result = sizeSelector();
+                console.log('result = ' + result);
+                if (result === true) {
+                    console.log('sizeSelector returned true');
+                    modification();
                 }
             } else {
-                for (i = codeSnippets.length - 1; i >= 0; i = i - 1) {
-                    codeSnippets[i].style.fontSize = CODESNIPPETSFONTSIZEORIGINAL;
-                }
-            }
-            
-            // Remove the number of comments
-            document.getElementsByClassName('load-comments')[0].parentElement.style.display = pageMode;
-            
-            // Creating URL Holder if it is not deifned
-            if (typeof (urlHolder) === 'undefined') {
-                // Create a new element for the URL
-                urlHolder = document.createElement('section');
-                // make it look like it belongs
-                urlHolder.className = 'cc pattern-bg-lighter';
-                // append it after the article
-                divs[2].appendChild(urlHolder);
-                
-                // Set innerText to the url
-                urlHolder.innerText = location.href;
-                // Stylising the reference
-                urlHolder.style.marginLeft = '0px';
-                urlHolder.style.textAlign = 'center';
-                urlHolder.style.fontWeight = 'bold';
-                urlHolder.style.paddingTop = '20px';
-            }
-                
-            // switching display of disqus comments for print mode and web mode
-            document.getElementById('disqus').style.display = pageMode;
-            
-            // switching display of urlHolder for print mode and web mode
-            urlHolder.style.display = urlMode;
-            
-            // switching display of footer for print mode and web mode
-            document.getElementsByTagName('footer')[0].style.display = pageMode;
-            
-            // Removing Youtube embedded videos if any because they come up as black spots in the print
-            embeds = document.getElementsByClassName('embed-container');
-            for (i = 0; i < embeds.length; i = i + 1) {
-                embeds[i].style.display = pageMode;
-            }
-            
-            // Removing the redirection from different language message
-            redirectMessage = document.getElementsByClassName('redirect_notification')[0];
-            if (redirectMessage) {
-                redirectMessage.style.display = pageMode;
-            }
-            
-            // Print the document.
-            if (pageMode === 'none') {
-                window.print();
-                // Switching back to webmode
-                articleModifier();
+                modification();
             }
             
         };
@@ -163,7 +280,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
         } else {
             // calling articleModifier causes the switch between printMode and webMode
             // First call for printMode
-            articleModifier();
+            articleModifier(true);
         }
         
 	} else if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" && location.href.length > 30) {
@@ -258,14 +375,3 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 	// Some website other than HTML5Rocks
 	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
 }
-
-// size selector - a way to chose the font size
-var sizeSelector = function () {
-    'use strict';
-    // Currently I will be rendering the choice container with the old mehtods of creating every element using javascript
-    // TODO: I plan to keep HTML for the choice container in a separate file.
-    // It should be having the functionality of text plugin of requirejs. https://github.com/requirejs/text
-    // And rendering of Mustache. https://github.com/janl/mustache.js  --  http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
-    // I am hoping to handle the text plugin and mustache using git submodules.
-    
-};
