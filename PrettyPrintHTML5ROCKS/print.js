@@ -35,6 +35,8 @@ var pageMode, urlMode;
 var embeds, ref, codeSnippets;
 var i;
 var urlHolder, redirectMessage;
+// Font sizes for different modes
+// 9 - small, 12 - normal, 18 - large
 var articleFontSize = '12px', codeSnippetsFontSize = '10px';
 var ARTICLEFONTSIZEORIGINAL = '18px', CODESNIPPETSFONTSIZEORIGINAL = '15px';
 
@@ -262,6 +264,8 @@ var sizeSelector = function () {
     'use strict';
     // Currently I will be rendering the choice container with the old mehtods of creating every element using javascript
     // TODO: I plan to keep HTML for the choice container in a separate file.
-    // It should be have the functionality of text plugin of requirejs. https://github.com/requirejs/text
+    // It should be having the functionality of text plugin of requirejs. https://github.com/requirejs/text
     // And rendering of Mustache. https://github.com/janl/mustache.js  --  http://coenraets.org/blog/2011/12/tutorial-html-templates-with-mustache-js/
+    // I am hoping to handle the text plugin and mustache using git submodules.
+    
 };
