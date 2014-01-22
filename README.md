@@ -1,4 +1,4 @@
-[Welcome to PrettyPrintHTML5ROCKS!](http://www.ishanatmuz.wordpress.com)
+[Welcome to PrettyPrintHTML5ROCKS!](http://ishanatmuz.github.io/PrettyPrintHTML5Rocks/)
 -------------------
 
 This is an early version of PrettyPrintHTML5ROCKS, a Google Chrome extension built to *print* the articles from http://www.html5rocks.com 
@@ -14,7 +14,7 @@ How to install and use PrettyPrintHTML5ROCKS
 
 #### Google Chrome Web Store.
 
-To start using PrettyPrintHTML5ROCKS, go to chrome web store and search for PrettyPrintHTML5ROCKS or HTML5Rocks, and install the extension from the results. Alternatively you can go to the [extension page](http://www.ishanatmuz.wordpress.com) and install it.
+To start using PrettyPrintHTML5ROCKS, go to chrome web store and search for PrettyPrintHTML5ROCKS or HTML5Rocks, and install the extension from the results. Alternatively you can go to the [extension page](http://ishanatmuz.github.io/PrettyPrintHTML5Rocks/) and install it.
 
 
 #### Usage
@@ -24,7 +24,7 @@ You can save the articles into PDF format too for printing later. Google Chrome 
 
 #### Need help?
 
-Having problems Installing [PrettyPrintHTML5ROCKS](http://www.ishanatmuz.wordpress.com) or printing or saving articles, just email me with 'PrettyPrintHTML5Rocks' as subject at ishanatmuzaffarpur@gmail.com.
+Having problems Installing [PrettyPrintHTML5ROCKS](http://ishanatmuz.github.io/PrettyPrintHTML5Rocks/) or printing or saving articles, just email me with 'PrettyPrintHTML5Rocks' as subject at ishanatmuzaffarpur@gmail.com.
 
 
 ####Helping PrettyPrintHTML5ROCKS
