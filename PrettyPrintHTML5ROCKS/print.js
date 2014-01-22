@@ -43,6 +43,7 @@ var ARTICLEFONTSIZEORIGINAL = '18px', CODESNIPPETSFONTSIZEORIGINAL = '15px';
 var container, options;
 var small, normal, large, buttons;
 
+// variables which do not work due to asynchronous nature of the input taken from user.
 var continueCondition = false;
 var result;
 
