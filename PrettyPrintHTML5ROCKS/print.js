@@ -374,5 +374,7 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 	}
 } else {
 	// Some website other than HTML5Rocks
-	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
+	// window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
+    console.log("testing access to console. does this work ?");
+    $("body").html("Foo!");
 }

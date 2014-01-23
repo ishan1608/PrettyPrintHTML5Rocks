@@ -22,10 +22,5 @@
 		"16": "images/icon_16.png",
 		"48": "images/icon_48.png",
 		"128": "images/icon_128.png"
-	},
-    
-    // Trying to add jQuery by Content Scripts. ALthough I am not sure, that this is the method for it
-    "content_scripts": [
-        "js": ["thirdParty/jquery-2.0.3.js"]
-    ]
+	}
 }
