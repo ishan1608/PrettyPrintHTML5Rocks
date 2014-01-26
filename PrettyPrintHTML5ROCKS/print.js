@@ -7,6 +7,8 @@
  * Google Plus: https://plus.google.com/111814328368711145786
  ****************************************************************************/
 
+/*global $ */
+
 /* Steps:
   1. Rmove the top header of the page.
   2. Remove the Table of Contents.
@@ -374,7 +376,8 @@ if (location.href.substring(0, 30) === "http://updates.html5rocks.com/" || locat
 	}
 } else {
 	// Some website other than HTML5Rocks
-	// window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
+	window.alert("This extension only prettifies html5rocks Please visit http://www.html5rocks.com");
     console.log("testing access to console. does this work ?");
-    $("body").html("Foo!");
+    // now since jquery is available with asynchronousity, the object $ is available.
+    // $("body").html("Foo!");
 }
