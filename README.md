@@ -58,4 +58,6 @@ Awesome! _You are one of the persons who like this extension and would like to s
 ----------------------------------------------
 ###### Disclaimer
 
-I have just started this project. So the extension is not live yet. I am having my final exams in my college too. So the work will be slow for now. But I hope to make the extension live as soon as I can.
+I haven't been able to create developer's account to upload this extension on Chrome webstore, due to the lack of availability of a Credit Card at my disposal. So the extension is still not live yet.
+Adding to the above mentioned reason, I also believe that this extension isn't mature enough or doesn't have enough functionality to be put on webstore.
+I am currently working on a feature to add three font sizes as an option for the user to chose. Currently I am stuck on the asynchronous nature of user input. Once I have fixed that, maybe I will upload the extension.
