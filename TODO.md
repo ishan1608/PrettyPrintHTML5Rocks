@@ -3,10 +3,15 @@
 
 This is the list of features that I want to implement, and the ones that have been suggested. It also contains a list of bugs which aren't resolved yet.
 
-###Website
-* I am planning to create a project site for this project.
->The site will be created using [GithubPages](http://pages.github.com/)
->This will enable me to not worry about hosting, and will be easy to maintain, as I can directly push updates using my gitBash.
+###[Website](http://ishanatmuz.github.io/PrettyPrintHTML5Rocks/)
+* Add a page to instruct users on how to install the extension from my packaged (crx) build.
+> Will add the build in main branch also, but will use .gitignore to not track it.
+
+###[FontOptions](https://github.com/ishanatmuz/PrettyPrintHTML5Rocks/tree/fontOptions)
+* The font options choser panel currently looks hideous. Need to make it look pretty.
+> The selection panel should be in a separate file.
+> I plan to use [Requirejs](http://requirejs.org/) with text plugin to separate the panel in a html file.
+> I will use [Mustachejs](http://mustache.github.io/) to render the panel.
 
 ###PDF Creation
 
