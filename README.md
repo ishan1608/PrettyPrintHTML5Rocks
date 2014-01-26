@@ -32,7 +32,7 @@ Having problems Installing [PrettyPrintHTML5ROCKS](http://ishanatmuz.github.io/P
 
 #### Extension not working!
 
-Email me to notify that extension is not working with 'PrettyPrintHTML5ROCKS' as subject at 'ishanatmuzaffarpur@gmail.com'. Do not forget to include the URL for which the error occurred.
+Email me to notify that extension is not working with 'PrettyPrintHTML5ROCKS' as subject at ishanatmuzaffarpur@gmail.com. Do not forget to include the URL for which the error occurred.
 If the page is getting printed but some item is omitted which shouldn't be, save the print result as a PDF file and attach it with the email.
 
 
@@ -43,7 +43,7 @@ If you have a suggestion as to how the extension should be improoved, please do 
 
 #### Want your favourite website to have an extension like this!
 
-Awesome! _You are one of the persons who like this extension and would like to see it grow beyond html5rocks.com_ You can help me out by dropping me an email at 'ishanatmuzaffarpur@gmail.com' with subject line populated with 'URL Request | PrettyPrintHTML5Rocks'. Please make sure that your insert the subject line properly as properly typed subject lines will pop up right in front of me and I won't miss your email by mistake.
+Awesome! You are one of the persons who like this extension and would like to see it grow beyond html5rocks.com You can help me out by dropping me an email at ishanatmuzaffarpur@gmail.com with subject line populated with 'URL Request | PrettyPrintHTML5Rocks'. Please make sure that your insert the subject line properly as properly typed subject lines will pop up right in front of me and I won't miss your email by mistake.
 
 
 

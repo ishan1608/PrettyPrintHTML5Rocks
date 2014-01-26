@@ -15,7 +15,7 @@ This is the list of features that I want to implement, and the ones that have be
 
 ###PDF Creation
 
-* **Create PDF on it's own..** Instead of relying on Chrome's feature to make PDF file from the print windows. The extension should be capable of generating PDF on it's own. I thought of this because when creating PDF Chrome does not detects images which aren't directly image tags. It is necessary for this extension because, when converting articles to PDF using Chrome's print dialog. The Supported Browsers icons are not getting converted into PDF.
+* **Create PDF on it's own**. Instead of relying on Chrome's feature to make PDF file from the print windows. The extension should be capable of generating PDF on it's own. I thought of this because when creating PDF Chrome does not detects images which aren't directly image tags. It is necessary for this extension because, when converting articles to PDF using Chrome's print dialog. The Supported Browsers icons are not getting converted into PDF.
 >I am hoping to use a library to create PDF from the pages.
 >This is one library that I found: http://parall.ax/products/jspdf
 
