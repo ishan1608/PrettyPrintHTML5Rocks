@@ -1,0 +1,26 @@
+{
+	"manifest_version": 2,
+	
+	"name": "PrettyPrintHTML5ROCKS",
+	"description": "This extension modifies the articles on http://www.html5rocks.com to make them fit for printing.",
+	"version": "0.1",
+	
+	"permissions": [
+		"activeTab"
+	],
+	
+	"browser_action": {
+		"default_icon": "images/icon_128.png"
+	},
+	
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
+	},
+	
+	"icons": {
+		"16": "images/icon_16.png",
+		"48": "images/icon_48.png",
+		"128": "images/icon_128.png"
+	}
+}
