@@ -10,7 +10,19 @@ chrome.browserAction.onClicked.addListener(function (tab) {
         file: 'thirdParty/jquery-2.0.3.js'
     }, function () {
         chrome.tabs.executeScript(null, {
-            file: 'print.js'
+            file: 'thirdParty/require.js'
+        }, function () {
+            chrome.tabs.executeScript(null, {
+                file: 'thirdParty/text.js'
+            }, function () {
+                chrome.tabs.executeScript(null, {
+                    file: 'mustache.js'
+                }, function () {
+                    chrome.tabs.executeScript(null, {
+                        file: 'print.js'
+                    });
+                });
+            });
         });
     });
     
