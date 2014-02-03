@@ -16,7 +16,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
                 file: 'thirdParty/text.js'
             }, function () {
                 chrome.tabs.executeScript(null, {
-                    file: 'mustache.js'
+                    file: 'thirdParty/mustache.js'
                 }, function () {
                     chrome.tabs.executeScript(null, {
                         file: 'print.js'
