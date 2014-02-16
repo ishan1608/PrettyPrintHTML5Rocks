@@ -3,6 +3,12 @@
 
 This is the list of features that I want to implement, and the ones that have been suggested. It also contains a list of bugs which aren't resolved yet.
 
+###Youtube Thumbnail
+* Need a way to generate thumbnails for youtube images adjacent to there links.
+
+###Short URLs
+* Automatically generate short URLs instead of copying the large ones.
+
 ###Website
 * I am planning to create a project site for this project.
 >The site will be created using [GithubPages](http://pages.github.com/)
